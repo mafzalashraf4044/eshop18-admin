@@ -19,18 +19,18 @@ export const getPaymentMethods = (searchTerm) => {
 
 export const addPaymentMethod = (paymentMethod) => {
     return (dispatch) => {
-        return axios.post('${API_URL}/paymentmethod/', paymentMethod, {headers: getHeaders()});
+        return axios.post(`${API_URL}/paymentmethod/`, paymentMethod, {headers: getHeaders()});
     }
 }
 
 export const editPaymentMethod = (id, paymentMethod) => {
     return (dispatch) => {
-        return axios.patch('${API_URL}/paymentmethod/' + id, paymentMethod, {headers: getHeaders()});
+        return axios.patch(`${API_URL}/paymentmethod/` + id, paymentMethod, {headers: getHeaders()});
     }
 }
 
 export const dltPaymentMethod = (id) => {
     return (dispatch) => {
-        return axios.delete('${API_URL}/paymentmethod/' + id, {headers: getHeaders()});
+        return axios.delete(`${API_URL}/paymentmethod/` + id, {headers: getHeaders()});
     }
 }
