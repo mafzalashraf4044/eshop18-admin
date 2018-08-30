@@ -1,0 +1,13 @@
+[core]
+	repositoryformatversion = 0
+	filemode = false
+	bare = false
+	logallrefupdates = true
+	symlinks = false
+	ignorecase = true
+	hideDotFiles = dotGitOnly
+[http]
+	postBuffer = 524288000
+[remote "origin"]
+	url = https://mafzalashraf@bitbucket.org/mafzalashraf/ebuyexchange-admin.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
