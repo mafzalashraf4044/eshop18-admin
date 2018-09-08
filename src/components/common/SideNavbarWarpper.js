@@ -90,6 +90,18 @@ class SideNavbarWarpper extends Component {
                         leftIcon={<FontIcon className='fa fa-newspaper-o' style={{fontSize: '20px'}} />} 
                     />
                     <ListItem 
+                        primaryText="Reviews" 
+                        className="navbar-item" 
+                        containerElement={<Link to="/reviews"/>}
+                        leftIcon={<FontIcon className='fa fa-comments' style={{fontSize: '20px'}} />} 
+                    />
+                    <ListItem 
+                        primaryText="Config" 
+                        className="navbar-item" 
+                        containerElement={<Link to="/config"/>}
+                        leftIcon={<FontIcon className='fa fa-cog' style={{fontSize: '20px'}} />} 
+                    />
+                    <ListItem 
                         primaryText="Logout" 
                         onClick={this.logout} 
                         className="navbar-item"

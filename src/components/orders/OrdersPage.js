@@ -25,6 +25,7 @@ import { Grid, Row, Col } from 'react-bootstrap';
 //Custom Components
 import DataTable from '../common/DataTable';
 import ActionBar from '../common/ActionBar';
+import UserDetailsModal from './UserDetailsModal';
 
 class OrdersPage extends Component {
 
@@ -39,12 +40,15 @@ class OrdersPage extends Component {
         receivedIn: "Received In",
         amountReceived: "Amount Received",
         status: "Status",
-        action: "Action"
+        actions: "Actions"
       },
       searchTerm: '',
       userFilterSearchTerm: '',
       user: null,
       type: 'buy',
+      showUserDetailsModal: false,
+      userDetails: null,
+      selectedOrderId: null,
     };
   }
 
@@ -138,6 +142,27 @@ class OrdersPage extends Component {
     });
   }
 
+  _toggleUserDetailsModal = (id) => {
+    this.setState(prevState => ({
+      showUserDetailsModal: prevState.showUserDetailsModal ? false : true,
+      selectedOrderId: id,
+    }), () => {
+      if (this.state.showUserDetailsModal) {
+        this._getUserDetailsFromOrder();
+      }
+    });
+  }
+
+  _getUserDetailsFromOrder = () => {
+    this.props.getUserDetailsFromOrder(this.state.selectedOrderId).then((res) => {
+      if (res.status === 200) {
+        this.setState({
+          userDetails: res.data.userDetails,
+        });
+      }
+    })
+  }
+
   render() {
     const actionBarLeft = (
       <div className="df jc-fs ai-c">
@@ -208,10 +233,18 @@ class OrdersPage extends Component {
                   data={this.props.orders}
                   headers={this.state.headers} 
                   onStatusUpdate={this.onStatusUpdate}
+                  _toggleUserDetailsModal={this._toggleUserDetailsModal}
                 />
               </Paper>
             </Col>
           </Row>
+
+          <UserDetailsModal
+            userDetails={this.state.userDetails}
+            showUserDetailsModal={this.state.showUserDetailsModal}
+            _toggleUserDetailsModal={this._toggleUserDetailsModal}
+            _getUserDetailsFromOrder={this._getUserDetailsFromOrder}
+          />
         </Grid>        
       </div>
     );
@@ -234,6 +267,7 @@ const mapDispatchToProps = (dispatch) => {
     getOrders: (type, searchTerm, user) => dispatch(orderActions.getOrders(type, searchTerm, user)),
     saveUsers: users => dispatch(userActions.saveUsers(users)),
     getUsers: searchTerm => dispatch(userActions.getUsers(searchTerm)),
+    getUserDetailsFromOrder: id => dispatch(orderActions.getUserDetailsFromOrder(id)),
   };
 }
 

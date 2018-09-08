@@ -21,6 +21,7 @@ export const addECurrency = (eCurrency) => {
     return (dispatch) => {
         return axios.post(`${API_URL}/ecurrency/`, {
             title: eCurrency.title,
+            reserves: eCurrency.reserves,
             buyCommissions: eCurrency.buyCommissions,
             sellCommissions: eCurrency.sellCommissions,
             exchangeCommissions: eCurrency.exchangeCommissions
@@ -31,7 +32,7 @@ export const addECurrency = (eCurrency) => {
 export const editECurrency = (id, eCurrency) => {
     return (dispatch) => {
         return axios.patch(`${API_URL}/ecurrency/` + id, {
-            title: eCurrency.title,
+            reserves: eCurrency.reserves,
             buyCommissions: eCurrency.buyCommissions,
             sellCommissions: eCurrency.sellCommissions,
             exchangeCommissions: eCurrency.exchangeCommissions

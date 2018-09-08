@@ -11,11 +11,11 @@ import Dialog from 'material-ui/Dialog';
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
 
-export default class AddEditNewsModal extends Component {
+export default class AddEditReviewModal extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            news: {title: '', content: ''},
+            review: {title: '', content: ''},
         };
         
     }
@@ -24,22 +24,22 @@ export default class AddEditNewsModal extends Component {
         return (this.state !== nextState ||
             this.props.isEditModal !== nextProps.isEditModal || 
             this.props.showAddEditModal !== nextProps.showAddEditModal ||
-            (this.props.selectedNews !== nextProps.selectedNews && nextProps.showAddEditModal)
-            //If selected user is changed and AddEditModal is Open, selectedNews value can also be changed in case of confirmDltModal
+            (this.props.selectedReview !== nextProps.selectedReview && nextProps.showAddEditModal)
+            //If selected user is changed and AddEditModal is Open, selectedReview value can also be changed in case of confirmDltModal
         );
 
     }
 
     componentWillReceiveProps = (nextProps) => {
         this.setState({
-            news: nextProps.selectedNews ? {title: nextProps.selectedNews.title, content: nextProps.selectedNews.content} : {title: '', content: ''},
+            review: nextProps.selectedReview ? {title: nextProps.selectedReview.title, content: nextProps.selectedReview.content} : {title: '', content: ''},
         });            
     }
 
     _handleInputChange = (event) => {
         let target = event.target;
         this.setState((prevState, props) => ({
-            news: update(prevState.news, {$merge: {[target.name]: target.value}}),
+            review: update(prevState.review, {$merge: {[target.name]: target.value}}),
         }));
     }
 
@@ -55,9 +55,9 @@ export default class AddEditNewsModal extends Component {
                 label={this.props.isEditModal ? 'Save Changes' : 'Add'}
                 onTouchTap={e => {
                     if(this.props.isEditModal){
-                        this.props._editNews(this.state.news)
+                        this.props._editReview(this.state.review)
                     }else{
-                        this.props._addNews(this.state.news)
+                        this.props._addReview(this.state.review)
                     }
                 }}
             />,
@@ -70,7 +70,7 @@ export default class AddEditNewsModal extends Component {
 
         return (
             <Dialog
-                title={this.props.isEditModal ? 'Edit News' : 'Add News'}
+                title={this.props.isEditModal ? 'Edit Review' : 'Add Review'}
                 actions={actions}
                 modal={false}
                 autoScrollBodyContent={true}
@@ -92,7 +92,7 @@ export default class AddEditNewsModal extends Component {
                     required
                     fullWidth
                     {...inputStyles}
-                    value={this.state.news.title}
+                    value={this.state.review.title}
                     floatingLabelText="Title"
                     onChange={this._handleInputChange}
                 />    
@@ -102,7 +102,7 @@ export default class AddEditNewsModal extends Component {
                     multiLine
                     fullWidth
                     {...inputStyles}
-                    value={this.state.news.content}
+                    value={this.state.review.content}
                     floatingLabelText="Content"
                     onChange={this._handleInputChange}
                 />
@@ -111,9 +111,9 @@ export default class AddEditNewsModal extends Component {
     };
 }
 
-AddEditNewsModal.propType = {
-    _addNews : PropTypes.func,
-    _editNews : PropTypes.func,
+AddEditReviewModal.propType = {
+    _addReview : PropTypes.func,
+    _editReview : PropTypes.func,
     showAddEditModal: PropTypes.bool,
     _toggleAddEditModal : PropTypes.func,
 }

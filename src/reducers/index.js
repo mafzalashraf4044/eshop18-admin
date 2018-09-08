@@ -4,6 +4,7 @@ import orderReducer from './orderReducer';
 import eCurrencyReducer from './eCurrencyReducer';
 import paymentMethodReducer from './paymentMethodReducer';
 import newsReducer from './newsReducer';
+import reviewReducer from './reviewReducer';
 import loginReducer from './loginReducer';
 
 const rootReducer = combineReducers({
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
     eCurrencyReducer,
     paymentMethodReducer,
     newsReducer,
+    reviewReducer,
     loginReducer,
 });
 

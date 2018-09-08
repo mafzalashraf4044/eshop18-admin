@@ -7,7 +7,7 @@ import _ from 'lodash';
 import PropTypes from 'prop-types';
 
 //constants
-import { USERS_PAGE, ORDERS_PAGE, ECURRENCIES_PAGE, PAYMENTMETHODS_PAGE, NEWS_PAGE } from '../../constants';
+import { USERS_PAGE, ORDERS_PAGE, ECURRENCIES_PAGE, PAYMENTMETHODS_PAGE, NEWS_PAGE, REVIEWS_PAGE } from '../../constants';
 
 //Third Party Components
 import Toggle from 'material-ui/Toggle';
@@ -57,7 +57,7 @@ class DataTable extends Component {
                 <td>{user.country}</td>,
                 <td>{user.contactNumber}</td>,
                 <td>
-                    <Toggle defaultToggled={user.isVerified} onToggle={(e, isVerfied) => this.props._toggleUserVerifiedStatus(user.id, index, isVerfied)} />
+                    <Toggle defaultToggled={user.isBankingEnabled} onToggle={(e, isVerfied) => this.props._toggleUserVerifiedStatus(user.id, index, isVerfied)} />
                 </td>,
 
             ];
@@ -66,9 +66,9 @@ class DataTable extends Component {
     getOrderTableCoulmns = (order) => {
         return [
                 <td>{order.id}</td>,
-                <td>{order.sentFrom}</td>,
+                <td>{order.sentFrom.title}</td>,
                 <td>{order.amountSent}</td>,
-                <td>{order.receivedIn}</td>,
+                <td>{order.receivedIn.title}</td>,
                 <td>{order.amountReceived}</td>,
                 <td>
                   <SelectField
@@ -88,7 +88,6 @@ class DataTable extends Component {
                     <MenuItem value="rejected" primaryText="Rejected" />
                   </SelectField>
                 </td>,
-                <td>{order.action ? order.action : '-'}</td>,
             ];
     }
 
@@ -96,13 +95,17 @@ class DataTable extends Component {
       return [
         <td>{eCurrency.id}</td>,
         <td>{eCurrency.title}</td>,
+        <td>{eCurrency.reserves}</td>,
       ];
     }
 
-    getPaymentMethodTableCoulmns = (paymentMethod) => {
+    getPaymentMethodTableCoulmns = (paymentMethod, index) => {
       return [
         <td>{paymentMethod.id}</td>,
         <td>{paymentMethod.title}</td>,
+        <td>
+            <Toggle defaultToggled={paymentMethod.isBankingEnabled} onToggle={(e, isBankingEnabled) => this.props._toggleIsBankingEnabled(paymentMethod.id, index, isBankingEnabled)} />
+        </td>,
       ];
     }
 
@@ -111,6 +114,14 @@ class DataTable extends Component {
         <td>{news.id}</td>,
         <td>{news.title}</td>,
         <td>{news.content}</td>,
+      ];
+    }
+
+    getReviewsTableCoulmns = (review) => {
+      return [
+        <td>{review.id}</td>,
+        <td>{review.title}</td>,
+        <td>{review.content}</td>,
       ];
     }
 
@@ -142,7 +153,7 @@ class DataTable extends Component {
                   }
 
                   {
-                    (this.props.parent === USERS_PAGE || this.props.parent === NEWS_PAGE || this.props.parent === ECURRENCIES_PAGE || this.props.parent === PAYMENTMETHODS_PAGE) &&
+                    (this.props.parent === USERS_PAGE || this.props.parent === NEWS_PAGE || this.props.parent === REVIEWS_PAGE || this.props.parent === ECURRENCIES_PAGE || this.props.parent === PAYMENTMETHODS_PAGE) &&
                     <th>Actions</th>
                   }
                 </tr>
@@ -155,11 +166,12 @@ class DataTable extends Component {
                           {this.props.parent === USERS_PAGE ? this.getUserTableCoulmns(row, index) : null}
                           {this.props.parent === ORDERS_PAGE ? this.getOrderTableCoulmns(row) : null}
                           {this.props.parent === ECURRENCIES_PAGE ? this.getECurrencyTableCoulmns(row) : null}
-                          {this.props.parent === PAYMENTMETHODS_PAGE ? this.getPaymentMethodTableCoulmns(row) : null}
+                          {this.props.parent === PAYMENTMETHODS_PAGE ? this.getPaymentMethodTableCoulmns(row, index) : null}
                           {this.props.parent === NEWS_PAGE ? this.getNewsTableCoulmns(row) : null}
+                          {this.props.parent === REVIEWS_PAGE ? this.getReviewsTableCoulmns(row) : null}
 
                           {
-                            (this.props.parent === USERS_PAGE || this.props.parent === NEWS_PAGE || this.props.parent === ECURRENCIES_PAGE || this.props.parent === PAYMENTMETHODS_PAGE) &&
+                            (this.props.parent === USERS_PAGE || this.props.parent === NEWS_PAGE || this.props.parent === REVIEWS_PAGE || this.props.parent === ECURRENCIES_PAGE || this.props.parent === PAYMENTMETHODS_PAGE || this.props.parent === ORDERS_PAGE) &&
                             <td>
                               <div className="btn-group">
                                 {
@@ -172,7 +184,16 @@ class DataTable extends Component {
                                 }
 
                                 {
-                                  (this.props.parent === NEWS_PAGE || this.props.parent === ECURRENCIES_PAGE) &&
+                                  this.props.parent === ORDERS_PAGE &&
+                                  <RaisedButton 
+                                    style={{minWidth: '40px'}} 
+                                    onTouchTap={(e) => this.props._toggleUserDetailsModal(row.id)} 
+                                    icon={<FontIcon className="fa fa-info-circle" style={{fontSize: '14px'}}/>} 
+                                  />
+                                }
+
+                                {
+                                  (this.props.parent === NEWS_PAGE || this.props.parent === REVIEWS_PAGE || this.props.parent === ECURRENCIES_PAGE) &&
                                   <RaisedButton 
                                     style={{minWidth: '40px'}} 
                                     onTouchTap={(e) => this.props._toggleAddEditModal(row)} 
@@ -180,11 +201,14 @@ class DataTable extends Component {
                                   />
                                 }
 
-                                <RaisedButton 
-                                  style={{minWidth: '40px'}} 
-                                  onTouchTap={(e) => this.props._toggleDltModal(row)} 
-                                  icon={<FontIcon className="fa fa-trash" style={{fontSize: '14px'}}/>} 
-                                />
+                                {
+                                  this.props.parent !== ORDERS_PAGE &&
+                                  <RaisedButton 
+                                    style={{minWidth: '40px'}} 
+                                    onTouchTap={(e) => this.props._toggleDltModal(row)} 
+                                    icon={<FontIcon className="fa fa-trash" style={{fontSize: '14px'}}/>} 
+                                  />
+                                }
                               </div>
                             </td>
                           }

@@ -60,6 +60,8 @@ class App extends Component {
                     <AuthProtectedRoute isAllowed={this.props.isLoggedIn} path='/ecurrencies' exact component={AdminPage} />
                     <AuthProtectedRoute isAllowed={this.props.isLoggedIn} path='/paymentmethods' exact component={AdminPage} />
                     <AuthProtectedRoute isAllowed={this.props.isLoggedIn} path='/news' exact component={AdminPage} />
+                    <AuthProtectedRoute isAllowed={this.props.isLoggedIn} path='/reviews' exact component={AdminPage} />
+                    <AuthProtectedRoute isAllowed={this.props.isLoggedIn} path='/config' exact component={AdminPage} />
                     <Redirect to={`${this.props.isLoggedIn ? '/users' : '/login'}`} />
                 </Switch>  
             );

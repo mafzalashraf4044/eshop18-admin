@@ -8,12 +8,11 @@ import PropTypes from 'prop-types';
 import update from 'immutability-helper';
 
 //constants
-import { ECURRENCIES_PAGE } from '../../constants';
+import { REVIEWS_PAGE } from '../../constants';
 
 //React-Redux
 import { connect } from 'react-redux';
-import * as eCurrencyActions from '../../actions/eCurrencyActions';
-import * as paymentMethodActions from '../../actions/paymentMethodActions';
+import * as reviewActions from '../../actions/reviewActions';
 
 //Third Party Components
 import Paper from 'material-ui/Paper';
@@ -23,10 +22,10 @@ import RaisedButton from 'material-ui/RaisedButton';
 //Custom Components
 import DataTable from '../common/DataTable';
 import ActionBar from '../common/ActionBar';
-import AddEditECurrency from './AddEditECurrency';
+import AddEditReviewModal from './AddEditReviewModal';
 import ConfirmDltPopup from '../common/ConfirmDltPopup';
 
-class ECurrenciesPage extends Component {
+class ReviewsPage extends Component {
 
   constructor(props) {
     super(props);
@@ -35,10 +34,10 @@ class ECurrenciesPage extends Component {
       headers: {
         id: "ID",
         title: "Title",
-        reserves: "Reserves",
+        content: "Content",
       },
       searchTerm: '',
-      selectedECurrency: null, //for dlt/edit
+      selectedReview: null, //for dlt/edit
       showDltModal: false,
       showAddEditModal: false,
       isEditModal: false,
@@ -46,10 +45,8 @@ class ECurrenciesPage extends Component {
   }
 
   componentDidMount = () => {
-    this._getECurrencies();
-
-    if (this.props.paymentMethods.length === 0){
-      this._getPaymentMethods();
+    if (this.props.reviews.length === 0){
+      this._getReviews();
     }
   }
 
@@ -58,7 +55,7 @@ class ECurrenciesPage extends Component {
       this.setState({
         searchTerm: '',
       }, () => {
-        this._getECurrencies();
+        this._getReviews();
       });
     }
   }
@@ -70,23 +67,13 @@ class ECurrenciesPage extends Component {
   }
   
   _handleSearchBtnClick = () => {
-    this._getECurrencies();
+    this._getReviews();
   }
 
-  _getECurrencies = () => {
-    this.props.getECurrencies(this.state.searchTerm).then((res) => {
+  _getReviews = () => {
+    this.props.getReviews(this.state.searchTerm).then((res) => {
       if (res.status === 200) {
-        this.props.saveECurrencies(res.data.eCurrencies);
-      }
-    }).catch((err) => {
-      throw new Error(err);
-    });
-  }
-
-  _getPaymentMethods = () => {
-    this.props.getPaymentMethods().then((res) => {
-      if (res.status === 200) {
-        this.props.savePaymentMethods(res.data.paymentMethods);
+        this.props.saveReviews(res.data.reviews);
       }
     }).catch((err) => {
       throw new Error(err);
@@ -97,25 +84,26 @@ class ECurrenciesPage extends Component {
     this.setState({
       searchTerm: '',
     }, () => {
-      this._getECurrencies();
+      this._getReviews();
     });
   }
 
-  _toggleDltModal = (selectedECurrency) => {
+  _toggleDltModal = (selectedReview) => {
     this.setState(prevState => ({
-      selectedECurrency,
+      selectedReview,
       showDltModal: prevState.showDltModal ? false : true,
     }));
   }
 
-  _dltselectedECurrency = () => {
-    this.props.dltECurrency(this.state.selectedECurrency.id).then((res) => {
+  _dltSelectedReview = () => {
+    this.props.dltReview(this.state.selectedReview.id).then((res) => {
       if (res.status === 200) {
-        this._getECurrencies();
+        const index = _.findIndex(this.state.reviews, (review) => (review.id === this.state.selectedReview.id));
 
+        this.props.saveReviews(update(this.props.reviews, {$splice: [[index, 1]]}));
         this.setState(prevState => ({
           showDltModal: false,
-          selectedECurrency: null,
+          selectedReview: null,
         }));
       }
     }).catch((err) => {
@@ -123,19 +111,18 @@ class ECurrenciesPage extends Component {
     });
   }
 
-  _toggleAddEditModal = (selectedECurrency = null) => {
+  _toggleAddEditModal = (selectedReview = null) => {
     this.setState((prevState, props) => ({
       showAddEditModal: prevState.showAddEditModal ? false : true,
-      selectedECurrency,
-      isEditModal: selectedECurrency ? true : false,
+      selectedReview,
+      isEditModal: selectedReview ? true : false,
     }));
   }
 
-  _addECurrency = (eCurrency) => {
-    this.props.addECurrency(eCurrency).then((res) => {
+  _addReview = (review) => {
+    this.props.addReview(review).then((res) => {
       if (res.status === 200) {
-        this._getECurrencies();
-
+        this.props.saveReviews(update(this.props.reviews, {$push: [res.data.review]}));
         this.setState(prevState => ({
           showAddEditModal: false,
         }));
@@ -145,11 +132,12 @@ class ECurrenciesPage extends Component {
     });
   }
 
-  _editECurrency = (eCurrency) => {
-    this.props.editECurrency(this.state.selectedECurrency.id, eCurrency).then((res) => {
+  _editReview = (review) => {
+    this.props.editReview(this.state.selectedReview.id, review).then((res) => {
       if (res.status === 200) {
-        this._getECurrencies();
+        const index = _.findIndex(this.props.reviews, (_review) => _review.id === this.state.selectedReview.id);
 
+        this.props.saveReviews(update(this.props.reviews, {$splice: [[index, 1, res.data.review]]}));
         this.setState(prevState => ({
           showAddEditModal: false,
           isEditModal: false,
@@ -161,13 +149,13 @@ class ECurrenciesPage extends Component {
   render() {
     const actionBarLeft = (
       <RaisedButton 
-        label="Add ECurrency"
+        label="Add Review"
         onTouchTap={() => this._toggleAddEditModal()} 
       />
     );
 
     return (
-      <div className="e-currency-page">
+      <div className="reviews-page">
         <Grid className="data-table-container" fluid={true}>
           <Row>
             <Col xs={12}>
@@ -181,9 +169,9 @@ class ECurrenciesPage extends Component {
                 />
 
                 <DataTable
-                  parent={ECURRENCIES_PAGE}
+                  parent={REVIEWS_PAGE}
                   headers={this.state.headers} 
-                  data={this.props.eCurrencies}
+                  data={this.props.reviews}
                   _toggleAddEditModal={this._toggleAddEditModal}
                   _toggleDltModal={this._toggleDltModal}
                 />
@@ -191,22 +179,20 @@ class ECurrenciesPage extends Component {
             </Col>
           </Row>
 
-          <AddEditECurrency
-            eCurrencies={this.props.eCurrencies}
-            paymentMethods={this.props.paymentMethods}
-            _addECurrency={this._addECurrency}
-            _editECurrency={this._editECurrency}
+          <AddEditReviewModal
+            _addReview={this._addReview}
+            _editReview={this._editReview}
             isEditModal={this.state.isEditModal}
-            selectedECurrency={this.state.selectedECurrency}
+            selectedReview={this.state.selectedReview}
             showAddEditModal={this.state.showAddEditModal}
             _toggleAddEditModal={this._toggleAddEditModal}
           />
 
           <ConfirmDltPopup
-            type='ECurrency'
+            type='Reviews'
             showDltModal={this.state.showDltModal}
             _toggleDltModal={this._toggleDltModal}
-            _dltSelected={this._dltselectedECurrency}
+            _dltSelected={this._dltSelectedReview}
           />
         
         </Grid>        
@@ -215,29 +201,26 @@ class ECurrenciesPage extends Component {
   }
 }
 
-ECurrenciesPage.propTypes = {
-  eCurrencies                      : PropTypes.array.eCurrencies,
-  getECurrencies                   : PropTypes.func.isRequired,
-  addECurrency                     : PropTypes.func.isRequired,
-  editECurrency                    : PropTypes.func.isRequired,
-  dltECurrency                     : PropTypes.func.isRequired,
+ReviewsPage.propTypes = {
+  reviews                       : PropTypes.array.isRequired,
+  getReviews                    : PropTypes.func.isRequired,
+  addReview                    : PropTypes.func.isRequired,
+  editReview                   : PropTypes.func.isRequired,
+  dltReview                    : PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state, ownProps) => ({
-  eCurrencies: state.eCurrencyReducer.eCurrencies,
-  paymentMethods: state.paymentMethodReducer.paymentMethods,
+  reviews: state.reviewReducer.reviews,
 });
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    saveECurrencies: eCurrencies => dispatch(eCurrencyActions.saveECurrencies(eCurrencies)),
-    addECurrency: id => dispatch(eCurrencyActions.addECurrency(id)),
-    editECurrency: (id, eCurrency) => dispatch(eCurrencyActions.editECurrency(id, eCurrency)),
-    dltECurrency: id => dispatch(eCurrencyActions.dltECurrency(id)),
-    getECurrencies: (searchTerm) => dispatch(eCurrencyActions.getECurrencies(searchTerm)),
-    savePaymentMethods: paymentMethods => dispatch(paymentMethodActions.savePaymentMethods(paymentMethods)),
-    getPaymentMethods: (searchTerm) => dispatch(paymentMethodActions.getPaymentMethods(searchTerm)),
+    saveReviews: reviews => dispatch(reviewActions.saveReviews(reviews)),
+    addReview: review => dispatch(reviewActions.addReview(review)),
+    editReview: (id, review) => dispatch(reviewActions.editReview(id, review)),
+    dltReview: id => dispatch(reviewActions.dltReview(id)),
+    getReviews: (searchTerm) => dispatch(reviewActions.getReviews(searchTerm)),
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ECurrenciesPage);
+export default connect(mapStateToProps, mapDispatchToProps)(ReviewsPage);

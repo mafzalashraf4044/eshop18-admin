@@ -19,6 +19,7 @@ export default class AddEditECurrency extends Component {
         this.state = {
             eCurrency: {
                 title: '',
+                reserves: '',
                 buyCommissions: [],
                 sellCommissions: [],
                 exchangeCommissions: [],
@@ -42,6 +43,7 @@ export default class AddEditECurrency extends Component {
             if (nextProps.selectedECurrency) {
                 this.setState({
                     eCurrency: {
+                        reserves: nextProps.selectedECurrency.reserves,
                         buyCommissions: nextProps.selectedECurrency.buyCommissions,
                         sellCommissions: nextProps.selectedECurrency.sellCommissions,
                         exchangeCommissions: nextProps.selectedECurrency.exchangeCommissions,
@@ -51,6 +53,7 @@ export default class AddEditECurrency extends Component {
                 this.setState({
                     eCurrency: {
                         title: '',
+                        reserves: '',
                         buyCommissions: nextProps.paymentMethods.map(eCurrency => ({
                             title: eCurrency.title, percentage: 0, fixed: 0
                         })),
@@ -125,15 +128,29 @@ export default class AddEditECurrency extends Component {
                 bodyStyle={{width: '100%', padding: '0px 20px 20px 20px'}}
                 actionsContainerStyle={{borderTop: '1px solid rgb(224, 224, 224)'}}
                 onRequestClose={(e) => this.props._toggleAddEditModal(null, null)}
-            >
+            >   
+                {
+                    !this.props.isEditModal &&
+                    <TextField
+                        name="title"
+                        required
+                        fullWidth
+                        type='text'
+                        {...inputStyles}
+                        value={this.state.eCurrency.title}
+                        floatingLabelText="Title"
+                        onChange={this._handleInputChange}
+                    />
+                }
+
                 <TextField
-                    name="title"
+                    name="reserves"
                     required
                     fullWidth
                     type='text'
                     {...inputStyles}
-                    value={this.state.eCurrency.title}
-                    floatingLabelText="Title"
+                    value={this.state.eCurrency.reserves}
+                    floatingLabelText="Reserves"
                     onChange={this._handleInputChange}
                 />
                 <Tabs>

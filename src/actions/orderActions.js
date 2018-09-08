@@ -22,3 +22,9 @@ export const updateOrderStatus = (id, status) => {
         return axios.post(`${API_URL}/update-order-status/${id}`, {status}, {headers: getHeaders()});
     }
 }
+
+export const getUserDetailsFromOrder = (id) => {
+    return (dispatch) => {
+        return axios.get(`${API_URL}/user-details-from-order/${id}`, {headers: getHeaders()});
+    }
+}

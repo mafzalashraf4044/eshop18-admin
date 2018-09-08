@@ -17,6 +17,8 @@ import FontIcon from 'material-ui/FontIcon';
 //Custom Components
 import UsersPage from '../users/UsersPage';
 import NewsPage from '../news/NewsPage';
+import ReviewsPage from '../reviews/ReviewsPage';
+import ConfigPage from '../config/ConfigPage';
 import OrdersPage from '../orders/OrdersPage';
 import ECurrenciesPage from '../eCurrencies/ECurrenciesPage';
 import PaymentMethodsPage from '../paymentMethods/PaymentMethodsPage';
@@ -77,6 +79,8 @@ export default class AdminPage extends Component {
                                       <Route path='/ecurrencies' component={ECurrenciesPage}/>
                                       <Route path='/paymentmethods' component={PaymentMethodsPage}/>
                                       <Route path='/news' component={NewsPage}/>
+                                      <Route path='/reviews' component={ReviewsPage}/>
+                                      <Route path='/config' component={ConfigPage}/>
                                   </Switch>                                
                               </Col>
                           </Row>

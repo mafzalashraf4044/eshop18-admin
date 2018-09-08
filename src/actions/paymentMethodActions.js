@@ -34,3 +34,9 @@ export const dltPaymentMethod = (id) => {
         return axios.delete(`${API_URL}/paymentmethod/` + id, {headers: getHeaders()});
     }
 }
+
+export const toggleIsBankingEnabled = (id, index, isBankingEnabled) => {
+    return (dispatch) => {
+        return axios.post(`${API_URL}/update-is-banking-enabled/` + id, {isBankingEnabled}, {headers: getHeaders()});
+    }
+}

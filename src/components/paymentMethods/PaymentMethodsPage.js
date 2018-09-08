@@ -34,6 +34,7 @@ class PaymentMethodsPage extends Component {
       headers: {
         id: "ID",
         title: "Title",
+        isBankingEnabled: 'Enable Banking',
       },
       searchTerm: '',
       selectedPaymentMethod: null, //for dlt/edit
@@ -84,6 +85,16 @@ class PaymentMethodsPage extends Component {
       searchTerm: '',
     }, () => {
       this._getPaymentMethods();
+    });
+  }
+
+  _toggleIsBankingEnabled = (id, index, isBankingEnabled) => {
+    this.props.toggleIsBankingEnabled(id, index, isBankingEnabled).then((res) => {
+      if (res.status === 200) {
+        this.props.savePaymentMethods(update(this.props.paymentMethods, {[index]: {isBankingEnabled: {$set: isBankingEnabled}}}));
+      }
+    }).catch((err) => {
+      throw new Error(err);
     });
   }
 
@@ -174,7 +185,8 @@ class PaymentMethodsPage extends Component {
                   data={this.props.paymentMethods}
                   _toggleAddEditModal={this._toggleAddEditModal}
                   _toggleDltModal={this._toggleDltModal}
-                />
+                  _toggleIsBankingEnabled={this._toggleIsBankingEnabled}
+                  />
               </Paper>
             </Col>
           </Row>
@@ -220,6 +232,7 @@ const mapDispatchToProps = (dispatch) => {
     editPaymentMethod: (id, paymentMethod) => dispatch(paymentMethodActions.editPaymentMethod(id, paymentMethod)),
     dltPaymentMethod: id => dispatch(paymentMethodActions.dltPaymentMethod(id)),
     getPaymentMethods: (searchTerm) => dispatch(paymentMethodActions.getPaymentMethods(searchTerm)),
+    toggleIsBankingEnabled: (id, index, isBankingEnabled) => dispatch(paymentMethodActions.toggleIsBankingEnabled(id, index, isBankingEnabled)),
   };
 }
 

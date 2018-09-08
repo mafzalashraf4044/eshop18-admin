@@ -74,9 +74,9 @@ export default class UserDetailsModal extends Component {
                               this.props.userDetails.orders.map((order) => (
                                 <tr>
                                   <td>{order.id}</td>
-                                  <td>{order.sentFrom}</td>
+                                  <td>{order.sentFrom.title}</td>
                                   <td>{order.amountSent}</td>
-                                  <td>{order.receivedIn}</td>
+                                  <td>{order.receivedIn.title}</td>
                                   <td>{order.amountReceived}</td>
                                   <td>{order.status}</td>
                                   <td>{order.action}</td>
@@ -96,15 +96,18 @@ export default class UserDetailsModal extends Component {
                         </table>
                       </div>
                     </Tab>
-                          
+
                     <Tab label="Accounts">
                       <div className="table-responsive">
                         <table className="table table-striped">
                           <thead>
                             <tr>
                               <th>ID</th>
+                              <th>First Name</th>
+                              <th>Last Name</th>
                               <th>Acc. Name</th>
                               <th>Acc. #</th>
+                              <th>Details</th>
                               <th>Type</th>
                               <th>Payment Method</th>
                               <th>E Currency</th>
@@ -118,14 +121,17 @@ export default class UserDetailsModal extends Component {
                               this.props.userDetails.accounts.map((account) => (
                                 <tr>
                                   <td>{account.id}</td>
-                                  <td>{account.accountName}</td>
-                                  <td>{account.accountNum}</td>
+                                  <td>{account.firstName ? account.firstName : '-'}</td>
+                                  <td>{account.lastName ? account.lastName : '-'}</td>
+                                  <td>{account.accountName ? account.accountName : '-'}</td>
+                                  <td>{account.accountNum ? account.accountNum : '-'}</td>
+                                  <td>{account.details ? account.details : '-'}</td>
                                   <td>{account.accountType}</td>
-                                  <td>{account.paymentMethod}</td>
-                                  <td>{account.eCurrency}</td>
-                                  <td>{account.bankName}</td>
-                                  <td>{account.bankAddress}</td>
-                                  <td>{account.bankSwiftCode}</td>
+                                  <td>{account.paymentMethod ? account.paymentMethod.title : '-'}</td>
+                                  <td>{account.eCurrency ? account.eCurrency.title : '-'}</td>
+                                  <td>{account.bankName ? account.bankName : '-'}</td>
+                                  <td>{account.bankAddress ? account.bankAddress : '-'}</td>
+                                  <td>{account.bankSwiftCode ? account.bankSwiftCode: '-'}</td>
                                 </tr>
                               ))
                             }
