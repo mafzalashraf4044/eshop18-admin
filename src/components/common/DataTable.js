@@ -67,9 +67,9 @@ class DataTable extends Component {
         return [
                 <td>{order.id}</td>,
                 <td>{order.sentFrom.title}</td>,
-                <td>{order.amountSent}</td>,
                 <td>{order.receivedIn.title}</td>,
-                <td>{order.amountReceived}</td>,
+                <td>{order.firstAmount}</td>,
+                <td>{order.secondAmount}</td>,
                 <td>
                   <SelectField
                     value={order.status}

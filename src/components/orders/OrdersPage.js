@@ -36,9 +36,9 @@ class OrdersPage extends Component {
       headers: {
         id: "ID",
         sentFrom: "Sent From",
-        amountSent: "Amount Sent",
         receivedIn: "Received In",
-        amountReceived: "Amount Received",
+        firstAmount: "Amount",
+        secondAmount: "Amount after Service Charges",
         status: "Status",
         actions: "Actions"
       },
