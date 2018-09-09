@@ -36,9 +36,11 @@ class ConfigPage extends Component {
   componentDidMount = () => {
     this.props.getConfig().then((res) => {
       if (res.status === 200) {
-        this.setState({
-          config: res.data.config,
-        });
+        if (Object.keys(res.data.config).length > 0) {
+          this.setState({
+            config: res.data.config,
+          });
+        }
       }
     }).catch((err) => {
       throw new Error(err);
@@ -55,9 +57,9 @@ class ConfigPage extends Component {
   _createOrUpdateConfig = () => {
     this.props.createOrUpdateConfig(this.state.config).then((res) => {
       if (res.status === 200) {
-        this.setState({
-          config: res.data.config
-        });
+        // this.setState({
+        //   config: res.data.config
+        // });
       }
     }).catch((err) => {
       throw new Error(err);
