@@ -5,7 +5,6 @@ import React, {
 //Helpers
 import _ from 'lodash';
 import PropTypes from 'prop-types';
-import update from 'immutability-helper';
 
 //constants
 import { ECURRENCIES_PAGE } from '../../constants';
@@ -216,7 +215,7 @@ class ECurrenciesPage extends Component {
 }
 
 ECurrenciesPage.propTypes = {
-  eCurrencies                      : PropTypes.array.eCurrencies,
+  eCurrencies                      : PropTypes.array.isRequired,
   getECurrencies                   : PropTypes.func.isRequired,
   addECurrency                     : PropTypes.func.isRequired,
   editECurrency                    : PropTypes.func.isRequired,

@@ -98,7 +98,7 @@ class ReviewsPage extends Component {
   _dltSelectedReview = () => {
     this.props.dltReview(this.state.selectedReview.id).then((res) => {
       if (res.status === 200) {
-        const index = _.findIndex(this.state.reviews, (review) => (review.id === this.state.selectedReview.id));
+        const index = _.findIndex(this.props.reviews, (review) => (review.id === this.state.selectedReview.id));
 
         this.props.saveReviews(update(this.props.reviews, {$splice: [[index, 1]]}));
         this.setState(prevState => ({

@@ -6,9 +6,6 @@ import React, {
 import PropTypes from 'prop-types';
 import update from 'immutability-helper';
 
-//React Router
-import { Switch, Route } from 'react-router-dom';
-
 //Third Party Components
 import Paper from 'material-ui/Paper';
 import Snackbar from 'material-ui/Snackbar';

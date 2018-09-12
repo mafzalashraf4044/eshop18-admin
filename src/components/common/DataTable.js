@@ -44,19 +44,19 @@ class DataTable extends Component {
     
     getUserTableCoulmns = (user, index) => {
         return [
-                <td style={{width: 40}}>
+                <td key='1' style={{width: 40}}>
                   <Checkbox
-                    checked={this.props.selectedUsers.indexOf(user.id) != -1}
+                    checked={this.props.selectedUsers.indexOf(user.id) !== -1}
                     onCheck={(e, checked) => this.props._setSelectedUsers(user.id, checked)}
                   />                  
                 </td>,
-                <td>{user.firstName}</td>,
-                <td>{user.lastName}</td>,
-                <td>{user.email}</td>,
-                <td>{user.username}</td>,
-                <td>{user.country}</td>,
-                <td>{user.contactNumber}</td>,
-                <td>
+                <td key='2'>{user.firstName}</td>,
+                <td key='3'>{user.lastName}</td>,
+                <td key='4'>{user.email}</td>,
+                <td key='5'>{user.username}</td>,
+                <td key='6'>{user.country}</td>,
+                <td key='7'>{user.contactNumber}</td>,
+                <td key='8'>
                     <Toggle defaultToggled={user.isBankingEnabled} onToggle={(e, isVerfied) => this.props._toggleUserVerifiedStatus(user.id, index, isVerfied)} />
                 </td>,
 
@@ -65,12 +65,12 @@ class DataTable extends Component {
 
     getOrderTableCoulmns = (order) => {
         return [
-                <td>{order.id}</td>,
-                <td>{order.sentFrom.title}</td>,
-                <td>{order.receivedIn.title}</td>,
-                <td>{order.firstAmount}</td>,
-                <td>{order.secondAmount}</td>,
-                <td>
+                <td key='1'>{order.id}</td>,
+                <td key='2'>{order.sentFrom.title}</td>,
+                <td key='3'>{order.receivedIn.title}</td>,
+                <td key='4'>{order.firstAmount}</td>,
+                <td key='5'>{order.secondAmount}</td>,
+                <td key='6'>
                   <SelectField
                     value={order.status}
                     onChange={(e, key, status) => this.props.onStatusUpdate(order.id, status)}
@@ -93,17 +93,17 @@ class DataTable extends Component {
 
     getECurrencyTableCoulmns = (eCurrency) => {
       return [
-        <td>{eCurrency.id}</td>,
-        <td>{eCurrency.title}</td>,
-        <td>{eCurrency.reserves}</td>,
+        <td key='1'>{eCurrency.id}</td>,
+        <td key='2'>{eCurrency.title}</td>,
+        <td key='3'>{eCurrency.reserves}</td>,
       ];
     }
 
     getPaymentMethodTableCoulmns = (paymentMethod, index) => {
       return [
-        <td>{paymentMethod.id}</td>,
-        <td>{paymentMethod.title}</td>,
-        <td>
+        <td key='1'>{paymentMethod.id}</td>,
+        <td key='2'>{paymentMethod.title}</td>,
+        <td key='3'>
             <Toggle defaultToggled={paymentMethod.isBankingEnabled} onToggle={(e, isBankingEnabled) => this.props._toggleIsBankingEnabled(paymentMethod.id, index, isBankingEnabled)} />
         </td>,
       ];
@@ -111,17 +111,17 @@ class DataTable extends Component {
 
     getNewsTableCoulmns = (news) => {
       return [
-        <td>{news.id}</td>,
-        <td>{news.title}</td>,
-        <td>{news.content}</td>,
+        <td key='1'>{news.id}</td>,
+        <td key='2'>{news.title}</td>,
+        <td key='3'>{news.content}</td>,
       ];
     }
 
     getReviewsTableCoulmns = (review) => {
       return [
-        <td>{review.id}</td>,
-        <td>{review.title}</td>,
-        <td>{review.content}</td>,
+        <td key='1'>{review.id}</td>,
+        <td key='2'>{review.title}</td>,
+        <td key='3'>{review.content}</td>,
       ];
     }
 
@@ -158,7 +158,7 @@ class DataTable extends Component {
                   }
                 </tr>
               </thead>
-              <tbody displayRowCheckbox={false}>
+              <tbody>
                 { 
                   this.props.data.map((row, index) => {
                     return (

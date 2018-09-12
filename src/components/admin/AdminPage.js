@@ -2,8 +2,6 @@ import React, {
   Component
 } from 'react';
 
-import PropTypes from 'prop-types';
-
 //React Router
 import { Switch, Route } from 'react-router-dom';
 

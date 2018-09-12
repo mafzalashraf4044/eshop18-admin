@@ -8,13 +8,9 @@ import PropTypes from 'prop-types';
 //Third Party Components
 import Dialog from 'material-ui/Dialog';
 import {Tabs, Tab} from 'material-ui/Tabs';
-import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
 
 export default class UserDetailsModal extends Component {
-  constructor(props) {
-      super(props);
-  }
 
   shouldComponentUpdate = (nextProps, nextState) => {
       return (this.state !== nextState ||
@@ -62,11 +58,10 @@ export default class UserDetailsModal extends Component {
                             <tr>
                               <th>ID</th>
                               <th>Sent From</th>
-                              <th>Amount Sent</th>
                               <th>Received In</th>
-                              <th>Amount Received</th>
+                              <th>Amount</th>
+                              <th>Amount after Service Charges</th>
                               <th>Status</th>
-                              <th>Action</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -75,11 +70,10 @@ export default class UserDetailsModal extends Component {
                                 <tr>
                                   <td>{order.id}</td>
                                   <td>{order.sentFrom.title}</td>
-                                  <td>{order.amountSent}</td>
                                   <td>{order.receivedIn.title}</td>
-                                  <td>{order.amountReceived}</td>
+                                  <td>{order.firstAmount}</td>
+                                  <td>{order.secondAmount}</td>
                                   <td>{order.status}</td>
-                                  <td>{order.action}</td>
                                 </tr>
                               ))
                             }
@@ -87,7 +81,7 @@ export default class UserDetailsModal extends Component {
                             {
                               this.props.userDetails.orders.length === 0 &&
                               <tr>
-                                <td style={{backgroundColor: '#FFF'}}>
+                                <td colSpan={6} style={{backgroundColor: '#FFF'}}>
                                   <div>Nothing to display.</div>
                                 </td>
                               </tr>

@@ -5,7 +5,7 @@ import React, {
 import PropTypes from 'prop-types';
 
 //React Router
-import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
+import { Switch, Redirect, withRouter } from 'react-router-dom';
 
 //Custom Components
 import LoginPage from './login/LoginPage';

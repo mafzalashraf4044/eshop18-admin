@@ -1,6 +1,3 @@
-//Helpers
-import update from 'immutability-helper';
-
 const defaultState = {
     reviews: [],
 };

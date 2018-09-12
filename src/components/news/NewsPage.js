@@ -98,7 +98,7 @@ class NewsPage extends Component {
   _dltSelectedNews = () => {
     this.props.dltNews(this.state.selectedNews.id).then((res) => {
       if (res.status === 200) {
-        const index = _.findIndex(this.state.news, (news) => (news.id === this.state.selectedNews.id));
+        const index = _.findIndex(this.props.news, (news) => (news.id === this.state.selectedNews.id));
 
         this.props.saveNews(update(this.props.news, {$splice: [[index, 1]]}));
         this.setState(prevState => ({

@@ -9,18 +9,7 @@ import PropTypes from 'prop-types';
 import RaisedButton from 'material-ui/RaisedButton';
 import { Row, Col, InputGroup, FormControl } from 'react-bootstrap';
 
-//constants
-import { USERS_PAGE, ORDERS_PAGE, ECURRENCIES_PAGE, PAYMENTMETHODS_PAGE, NEWS_PAGE } from '../../constants';
-
 export default class ActionBar extends Component {
-    
-    // shouldComponentUpdate = (nextProps, nextState) => {
-    //   return (
-    //     this.props.searchTerm !== nextProps.searchTerm ||
-    //     this.props.selectedUsers !== nextProps.selectedUsers ||
-    //     this.props.userFilter !== nextProps.userFilter
-    //   );
-    // }
 
     render() {
         return (

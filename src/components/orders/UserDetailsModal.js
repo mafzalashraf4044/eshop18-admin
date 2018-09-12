@@ -8,13 +8,9 @@ import PropTypes from 'prop-types';
 //Third Party Components
 import Dialog from 'material-ui/Dialog';
 import {Tabs, Tab} from 'material-ui/Tabs';
-import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
 
 export default class UserDetailsModal extends Component {
-  constructor(props) {
-      super(props);
-  }
 
   shouldComponentUpdate = (nextProps, nextState) => {
       return (this.state !== nextState ||
