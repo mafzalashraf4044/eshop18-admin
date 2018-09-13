@@ -11,18 +11,6 @@ app.get(gzipFiles, (req, res) => {
   res.set('Content-Encoding', 'gzip');
   next();
 });
-app.get('/fonts/*.ttf', (req, res) => {
-  res.sendFile(path.join(__dirname, `build/${req.url}`));
-});
-app.get('/images/*.png', (req, res) => {
-  res.sendFile(path.join(__dirname, `build/${req.url}`));
-});
-app.get('*.js', (req, res) => {
-  res.sendFile(path.join(__dirname, `build/${req.url}`));
-});
-app.get('*.css', (req, res) => {
-  res.sendFile(path.join(__dirname, `build/${req.url}`));
-});
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'build/index.html'));
 });

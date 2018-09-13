@@ -15,8 +15,8 @@ import AdminPage from './admin/AdminPage';
 import { connect } from 'react-redux';
 import * as loginActions from '../actions/loginActions';
 
-const LoginRoute = ({ isAllowed, ...props }) => isAllowed ? <props.component /> : <Redirect to="/users"/>;
-const AuthProtectedRoute = ({ isAllowed, ...props }) => isAllowed ? <props.component /> : <Redirect to="/login"/>;
+const LoginRoute = ({ isAllowed, ...props }) => isAllowed ? <props.component /> : <Redirect to="/admin/users"/>;
+const AuthProtectedRoute = ({ isAllowed, ...props }) => isAllowed ? <props.component /> : <Redirect to="/admin/login"/>;
 
 class App extends Component {
 
@@ -54,15 +54,15 @@ class App extends Component {
         if (this.state.isLoggedInChecked) {
             return (
                 <Switch>
-                    <LoginRoute isAllowed={!this.props.isLoggedIn} path='/login' exact component={LoginPage} />
-                    <AuthProtectedRoute isAllowed={this.props.isLoggedIn} path='/users' exact component={AdminPage} />
-                    <AuthProtectedRoute isAllowed={this.props.isLoggedIn} path='/orders' exact component={AdminPage} />
-                    <AuthProtectedRoute isAllowed={this.props.isLoggedIn} path='/ecurrencies' exact component={AdminPage} />
-                    <AuthProtectedRoute isAllowed={this.props.isLoggedIn} path='/paymentmethods' exact component={AdminPage} />
-                    <AuthProtectedRoute isAllowed={this.props.isLoggedIn} path='/news' exact component={AdminPage} />
-                    <AuthProtectedRoute isAllowed={this.props.isLoggedIn} path='/reviews' exact component={AdminPage} />
-                    <AuthProtectedRoute isAllowed={this.props.isLoggedIn} path='/config' exact component={AdminPage} />
-                    <Redirect to={`${this.props.isLoggedIn ? '/users' : '/login'}`} />
+                    <LoginRoute isAllowed={!this.props.isLoggedIn} path='/admin/login' exact component={LoginPage} />
+                    <AuthProtectedRoute isAllowed={this.props.isLoggedIn} path='/admin/users' exact component={AdminPage} />
+                    <AuthProtectedRoute isAllowed={this.props.isLoggedIn} path='/admin/orders' exact component={AdminPage} />
+                    <AuthProtectedRoute isAllowed={this.props.isLoggedIn} path='/admin/ecurrencies' exact component={AdminPage} />
+                    <AuthProtectedRoute isAllowed={this.props.isLoggedIn} path='/admin/paymentmethods' exact component={AdminPage} />
+                    <AuthProtectedRoute isAllowed={this.props.isLoggedIn} path='/admin/news' exact component={AdminPage} />
+                    <AuthProtectedRoute isAllowed={this.props.isLoggedIn} path='/admin/reviews' exact component={AdminPage} />
+                    <AuthProtectedRoute isAllowed={this.props.isLoggedIn} path='/admin/config' exact component={AdminPage} />
+                    <Redirect to={`${this.props.isLoggedIn ? '/admin/users' : '/admin/login'}`} />
                 </Switch>  
             );
         }
