@@ -5,4 +5,4 @@ export const PAYMENTMETHODS_PAGE = 4;
 export const NEWS_PAGE = 5;
 export const REVIEWS_PAGE = 6;
 
-export const API_URL = "http://localhost:1337";
+export const API_URL = ARG_API_URL;
