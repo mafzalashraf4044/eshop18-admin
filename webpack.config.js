@@ -11,7 +11,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].bundle.js',
-    publicPath: '/',
+    publicPath: '/admin/',
   },
   resolve: {
     extensions: [
@@ -126,7 +126,7 @@ module.exports = {
     ]
     : [
       new HtmlWebpackPlugin({
-        title: 'ebuyexhange',
+        title: 'admin - ebuyexhange',
         minify: {
           collapseWhitespace: isProduction,
         },
