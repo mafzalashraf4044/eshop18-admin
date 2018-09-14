@@ -1,1 +1,15 @@
-'{ "presets": ["react", "es2015"] }' 
+{
+  // "presets": [
+  //   ["es2015", {
+  //     "modules": false
+  //   }], "stage-0", "react"
+  // ],
+  "presets": ["env", ["es2015", { "modules": false }], "stage-0", "react"],
+  // "plugins": ["transform-async-to-generator", "transform-async-generator-functions"],
+  "plugins": [
+    ["transform-runtime", "transform-async-to-generator", "transform-async-generator-functions", {
+      "polyfill": false,
+      "regenerator": true
+    }]
+  ]
+}

@@ -72,13 +72,13 @@ export default class AdminPage extends Component {
                               <Col xs={12}>
                                   {/*Router Outlet/Container for Active Route*/}
                                   <Switch>
-                                      <Route exact path='/admin/users' component={UsersPage}/>
-                                      <Route path='/admin/orders' component={OrdersPage}/>
-                                      <Route path='/admin/ecurrencies' component={ECurrenciesPage}/>
-                                      <Route path='/admin/paymentmethods' component={PaymentMethodsPage}/>
-                                      <Route path='/admin/news' component={NewsPage}/>
-                                      <Route path='/admin/reviews' component={ReviewsPage}/>
-                                      <Route path='/admin/config' component={ConfigPage}/>
+                                      <Route exact path='/users' component={UsersPage}/>
+                                      <Route path='/orders' component={OrdersPage}/>
+                                      <Route path='/ecurrencies' component={ECurrenciesPage}/>
+                                      <Route path='/paymentmethods' component={PaymentMethodsPage}/>
+                                      <Route path='/news' component={NewsPage}/>
+                                      <Route path='/reviews' component={ReviewsPage}/>
+                                      <Route path='/config' component={ConfigPage}/>
                                   </Switch>                                
                               </Col>
                           </Row>

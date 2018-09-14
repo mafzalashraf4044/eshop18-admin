@@ -3,6 +3,10 @@
     src: url(../fonts/Roboto/Roboto-Regular.ttf);
 }
 
+@import "./dependencies/bootstrap/css/bootstrap.min.css";
+@import "./dependencies/bootstrap/css/bootstrap-theme.min.css";
+@import "./dependencies/font-awesome/css/font-awesome.min.css";
+
 body {
   margin: 0;
   padding: 0;
