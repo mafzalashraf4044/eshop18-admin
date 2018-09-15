@@ -40,7 +40,7 @@ class LoginPage extends Component {
     this.props.login(this.state.credentials).then((res) => {
       if (res.status === 200) {
         localStorage.setItem("token", res.data.token);
-        window.location = '/users';
+        window.location = '/admin/users';
       }
     }).catch((err) => {
       if (err.response.status === 403) {

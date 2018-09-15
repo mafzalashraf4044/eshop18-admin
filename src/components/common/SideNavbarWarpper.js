@@ -36,7 +36,7 @@ class SideNavbarWarpper extends Component {
         this.props.logout().then((res) => {
             if (res.status === 200) {
               localStorage.removeItem("token");
-              window.location = '/login';
+              window.location = '/admin/login';
             }
         }).catch((err) => {
             throw new Error(err);

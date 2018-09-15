@@ -57,6 +57,7 @@ export default class UserDetailsModal extends Component {
                           <thead>
                             <tr>
                               <th>ID</th>
+                              <th>Date</th>
                               <th>Sent From</th>
                               <th>Received In</th>
                               <th>Amount</th>
@@ -66,16 +67,21 @@ export default class UserDetailsModal extends Component {
                           </thead>
                           <tbody>
                             {
-                              this.props.userDetails.orders.map((order) => (
-                                <tr>
-                                  <td>{order.id}</td>
-                                  <td>{order.sentFrom.title}</td>
-                                  <td>{order.receivedIn.title}</td>
-                                  <td>{order.firstAmount}</td>
-                                  <td>{order.secondAmount}</td>
-                                  <td>{order.status}</td>
-                                </tr>
-                              ))
+                              this.props.userDetails.orders.map((order, index) => {
+                                const createdAt = new Date(order.createdAt);
+
+                                return (
+                                  <tr key={index}>
+                                    <td>{order.id}</td>
+                                    <td>{`${createdAt.toLocaleDateString()} ${createdAt.toLocaleTimeString()}`}</td>
+                                    <td>{order.sentFrom.title}</td>
+                                    <td>{order.receivedIn.title}</td>
+                                    <td>{order.firstAmount}</td>
+                                    <td>{order.secondAmount}</td>
+                                    <td>{order.status}</td>
+                                  </tr>
+                                );
+                              })
                             }
 
                             {
@@ -112,8 +118,8 @@ export default class UserDetailsModal extends Component {
                           </thead>
                           <tbody>
                             {
-                              this.props.userDetails.accounts.map((account) => (
-                                <tr>
+                              this.props.userDetails.accounts.map((account, index) => (
+                                <tr key={index}>
                                   <td>{account.id}</td>
                                   <td>{account.firstName ? account.firstName : '-'}</td>
                                   <td>{account.lastName ? account.lastName : '-'}</td>

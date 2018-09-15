@@ -35,6 +35,7 @@ class OrdersPage extends Component {
     this.state = {
       headers: {
         id: "ID",
+        date: "Date",
         sentFrom: "Sent From",
         receivedIn: "Received In",
         firstAmount: "Amount",

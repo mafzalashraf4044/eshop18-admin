@@ -15,6 +15,9 @@ import App from './components/App';
 //  styles
 import 'assets/css/styles.scss';
 
+import injectTapEventPlugin from 'react-tap-event-plugin';
+injectTapEventPlugin();
+
 ReactDOM.render(
   <Provider store={store}>
     <Router history={browserHistory} basename="admin">

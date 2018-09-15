@@ -64,31 +64,34 @@ class DataTable extends Component {
     }
 
     getOrderTableCoulmns = (order) => {
-        return [
-                <td key='1'>{order.id}</td>,
-                <td key='2'>{order.sentFrom.title}</td>,
-                <td key='3'>{order.receivedIn.title}</td>,
-                <td key='4'>{order.firstAmount}</td>,
-                <td key='5'>{order.secondAmount}</td>,
-                <td key='6'>
-                  <SelectField
-                    value={order.status}
-                    onChange={(e, key, status) => this.props.onStatusUpdate(order.id, status)}
-                    style={{
-                      width: "100%",
-                      fontSize: "13px"
-                    }}
-                    menuItemStyle={{
-                      fontSize: "13px"
-                    }}
-                  >
-                    <MenuItem value="pending" primaryText="Pending" />
-                    <MenuItem value="completed" primaryText="Completed" />
-                    <MenuItem value="cancelled" primaryText="Cancelled" />
-                    <MenuItem value="rejected" primaryText="Rejected" />
-                  </SelectField>
-                </td>,
-            ];
+      const createdAt = new Date(order.createdAt);
+
+      return [
+        <td key='1'>{order.id}</td>,
+        <td key='2'>{`${createdAt.toLocaleDateString()} ${createdAt.toLocaleTimeString()}`}</td>,
+        <td key='3'>{order.sentFrom.title}</td>,
+        <td key='4'>{order.receivedIn.title}</td>,
+        <td key='5'>{order.firstAmount}</td>,
+        <td key='6'>{order.secondAmount}</td>,
+        <td key='7'>
+          <SelectField
+            value={order.status}
+            onChange={(e, key, status) => this.props.onStatusUpdate(order.id, status)}
+            style={{
+              width: "100%",
+              fontSize: "13px"
+            }}
+            menuItemStyle={{
+              fontSize: "13px"
+            }}
+          >
+            <MenuItem value="pending" primaryText="Pending" />
+            <MenuItem value="completed" primaryText="Completed" />
+            <MenuItem value="cancelled" primaryText="Cancelled" />
+            <MenuItem value="rejected" primaryText="Rejected" />
+          </SelectField>
+        </td>,
+      ];
     }
 
     getECurrencyTableCoulmns = (eCurrency) => {
