@@ -57,9 +57,8 @@ class DataTable extends Component {
                 <td key='6'>{user.country}</td>,
                 <td key='7'>{user.contactNumber}</td>,
                 <td key='8'>
-                    <Toggle defaultToggled={user.isBankingEnabled} onToggle={(e, isVerfied) => this.props._toggleUserVerifiedStatus(user.id, index, isVerfied)} />
+                    <Toggle defaultToggled={user.isVerified} onToggle={(e, isVerified) => this.props._toggleUserVerifiedStatus(user.id, index, isVerified)} />
                 </td>,
-
             ];
     }
 
