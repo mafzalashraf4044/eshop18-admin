@@ -174,6 +174,7 @@ class ECurrenciesPage extends Component {
                 <ActionBar
                   actionBarLeft={actionBarLeft}
                   searchTerm={this.state.searchTerm}
+                  searchPlaceholder="ID, Title"
                   _handleSearchTermChange={this._handleSearchTermChange}
                   _clearFilteredData={this._clearFilteredData}
                   _handleSearchBtnClick={this._handleSearchBtnClick}

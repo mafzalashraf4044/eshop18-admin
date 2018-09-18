@@ -33,6 +33,8 @@ class UsersPage extends Component {
 
     this.state = {
       headers: {
+        id: "ID",
+        date: "Date",
         firstName: "First Name",
         lastName: "Last Name",
         email: "Email",
@@ -221,6 +223,7 @@ class UsersPage extends Component {
                   parent={USERS_PAGE}
                   actionBarLeft={actionBarLeft}
                   searchTerm={this.state.searchTerm}
+                  searchPlaceholder="Search..."
                   _clearFilteredData={this._clearFilteredData}
                   _handleSearchBtnClick={this._handleSearchBtnClick}
                   _handleSearchTermChange={this._handleSearchTermChange}

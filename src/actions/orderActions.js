@@ -13,7 +13,7 @@ export const saveOrders = (orders) => {
 
 export const getOrders = (type, searchTerm, user) => {
     return (dispatch) => {
-        return axios.get(`${API_URL}/order?type=${type}${searchTerm ? `&searchTerm=${searchTerm}` : ''}${user ? `&user=${user}` : ''}`, {headers: getHeaders()});
+        return axios.get(`${API_URL}/order?type=${type}${searchTerm ? `&searchTerm=${searchTerm}` : ''}${user ? `&user=${user}` : ''}&sortType=DESC&sortBy=createdAt`, {headers: getHeaders()});
     }
 }
 

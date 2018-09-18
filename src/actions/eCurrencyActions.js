@@ -13,7 +13,7 @@ export const saveECurrencies = (eCurrencies) => {
 
 export const getECurrencies = (searchTerm) => {
     return (dispatch) => {
-        return axios.get(`${API_URL}/ecurrency${searchTerm ? `?searchTerm=${searchTerm}` : ''}`, {headers: getHeaders()});
+        return axios.get(`${API_URL}/ecurrency?sortType=DESC&sortBy=createdAt${searchTerm ? `&searchTerm=${searchTerm}` : ''}`, {headers: getHeaders()});
     }
 }
 

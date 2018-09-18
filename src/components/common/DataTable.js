@@ -43,6 +43,7 @@ class DataTable extends Component {
     }
     
     getUserTableCoulmns = (user, index) => {
+        const createdAt = new Date(user.createdAt);
         return [
                 <td key='1' style={{width: 40}}>
                   <Checkbox
@@ -50,13 +51,15 @@ class DataTable extends Component {
                     onCheck={(e, checked) => this.props._setSelectedUsers(user.id, checked)}
                   />                  
                 </td>,
-                <td key='2'>{user.firstName}</td>,
-                <td key='3'>{user.lastName}</td>,
-                <td key='4'>{user.email}</td>,
-                <td key='5'>{user.username}</td>,
-                <td key='6'>{user.country}</td>,
-                <td key='7'>{user.contactNumber}</td>,
-                <td key='8'>
+                <td key='2'>{user.id}</td>,
+                <td key='3'>{`${createdAt.toLocaleDateString()} ${createdAt.toLocaleTimeString()}`}</td>,
+                <td key='4'>{user.firstName}</td>,
+                <td key='5'>{user.lastName}</td>,
+                <td key='6'>{user.email}</td>,
+                <td key='7'>{user.username}</td>,
+                <td key='8'>{user.country}</td>,
+                <td key='9'>{user.contactNumber}</td>,
+                <td key='10'>
                     <Toggle defaultToggled={user.isVerified} onToggle={(e, isVerified) => this.props._toggleUserVerifiedStatus(user.id, index, isVerified)} />
                 </td>,
             ];

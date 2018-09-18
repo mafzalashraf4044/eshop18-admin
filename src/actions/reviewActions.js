@@ -13,7 +13,7 @@ export const saveReviews = (reviews) => {
 
 export const getReviews = (searchTerm) => {
     return (dispatch) => {
-        return axios.get(`${API_URL}/review${searchTerm ? `?searchTerm=${searchTerm}` : ''}`, {headers: getHeaders()});
+        return axios.get(`${API_URL}/review?sortType=DESC&sortBy=createdAt${searchTerm ? `&searchTerm=${searchTerm}` : ''}`, {headers: getHeaders()});
     }
 }
 

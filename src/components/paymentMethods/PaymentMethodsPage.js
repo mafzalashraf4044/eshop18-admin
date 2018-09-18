@@ -133,7 +133,7 @@ class PaymentMethodsPage extends Component {
     this.props.addPaymentMethod(paymentMethod).then((res) => {
       if (res.status === 200) {
 
-        this.props.savePaymentMethods(update(this.props.paymentMethods, {$push: [res.data.paymentMethod]}));
+        this.props.savePaymentMethods(update(this.props.paymentMethods, {$unshift: [res.data.paymentMethod]}));
         this.setState(prevState => ({
           showAddEditModal: false,
         }));
@@ -174,6 +174,7 @@ class PaymentMethodsPage extends Component {
                 <ActionBar
                   actionBarLeft={actionBarLeft}
                   searchTerm={this.state.searchTerm}
+                  searchPlaceholder="ID, Title"
                   _handleSearchTermChange={this._handleSearchTermChange}
                   _clearFilteredData={this._clearFilteredData}
                   _handleSearchBtnClick={this._handleSearchBtnClick}

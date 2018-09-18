@@ -122,7 +122,7 @@ class NewsPage extends Component {
   _addNews = (news) => {
     this.props.addNews(news).then((res) => {
       if (res.status === 200) {
-        this.props.saveNews(update(this.props.news, {$push: [res.data.news]}));
+        this.props.saveNews(update(this.props.news, {$unshift: [res.data.news]}));
         this.setState(prevState => ({
           showAddEditModal: false,
         }));
@@ -162,6 +162,7 @@ class NewsPage extends Component {
               <Paper zDepth={1}>
                 <ActionBar
                   actionBarLeft={actionBarLeft}
+                  searchPlaceholder="ID, Title, Content"
                   searchTerm={this.state.searchTerm}
                   _handleSearchTermChange={this._handleSearchTermChange}
                   _clearFilteredData={this._clearFilteredData}

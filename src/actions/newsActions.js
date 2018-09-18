@@ -11,15 +11,9 @@ export const saveNews = (news) => {
     };
 }
 
-export const getOrders = (type, searchTerm, user) => {
-    return (dispatch) => {
-        return axios.get(`${API_URL}/order?type=${type}${searchTerm ? `&searchTerm=${searchTerm}` : ''}${user ? `&user=${user}` : ''}`, {headers: getHeaders()});
-    }
-}
-
 export const getNews = (searchTerm) => {
     return (dispatch) => {
-        return axios.get(`${API_URL}/news${searchTerm ? `?searchTerm=${searchTerm}` : ''}`, {headers: getHeaders()});
+        return axios.get(`${API_URL}/news?sortType=DESC&sortBy=createdAt${searchTerm ? `&searchTerm=${searchTerm}` : ''}`, {headers: getHeaders()});
     }
 }
 

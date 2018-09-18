@@ -224,6 +224,7 @@ class OrdersPage extends Component {
                   parent={ORDERS_PAGE}
                   actionBarLeft={actionBarLeft}
                   searchTerm={this.state.searchTerm}
+                  searchPlaceholder="ID, Status"
                   _handleSearchTermChange={this._handleSearchTermChange}
                   _clearFilteredData={this._clearFilteredData}
                   _handleSearchBtnClick={this._handleSearchBtnClick}

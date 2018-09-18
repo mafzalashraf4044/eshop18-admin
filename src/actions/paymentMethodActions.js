@@ -13,7 +13,7 @@ export const savePaymentMethods = (paymentMethods) => {
 
 export const getPaymentMethods = (searchTerm) => {
     return (dispatch) => {
-        return axios.get(`${API_URL}/paymentmethod${searchTerm ? `?searchTerm=${searchTerm}` : ''}`, {headers: getHeaders()});
+        return axios.get(`${API_URL}/paymentmethod?sortType=DESC&sortBy=createdAt${searchTerm ? `&searchTerm=${searchTerm}` : ''}`, {headers: getHeaders()});
     }
 }
 

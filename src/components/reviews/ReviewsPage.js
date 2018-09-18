@@ -122,7 +122,7 @@ class ReviewsPage extends Component {
   _addReview = (review) => {
     this.props.addReview(review).then((res) => {
       if (res.status === 200) {
-        this.props.saveReviews(update(this.props.reviews, {$push: [res.data.review]}));
+        this.props.saveReviews(update(this.props.reviews, {$unshift: [res.data.review]}));
         this.setState(prevState => ({
           showAddEditModal: false,
         }));
@@ -163,6 +163,7 @@ class ReviewsPage extends Component {
                 <ActionBar
                   actionBarLeft={actionBarLeft}
                   searchTerm={this.state.searchTerm}
+                  searchPlaceholder="ID, Title, Content"
                   _handleSearchTermChange={this._handleSearchTermChange}
                   _clearFilteredData={this._clearFilteredData}
                   _handleSearchBtnClick={this._handleSearchBtnClick}

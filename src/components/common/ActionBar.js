@@ -23,7 +23,7 @@ export default class ActionBar extends Component {
                   <InputGroup className="has-feedback has-clear">
                     <FormControl 
                       type="text" 
-                      placeholder="Search..." 
+                      placeholder={this.props.searchPlaceholder} 
                       className="search-input" 
                       value={this.props.searchTerm} 
                       onChange={this.props._handleSearchTermChange}

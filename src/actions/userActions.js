@@ -13,7 +13,7 @@ export const saveUsers = (users) => {
 
 export const getUsers = (searchTerm) => {
     return (dispatch) => {
-        return axios.get(`${API_URL}/user${searchTerm ? `?searchTerm=${searchTerm}` : ''}`, {headers: getHeaders()});
+        return axios.get(`${API_URL}/user?sortType=DESC&sortBy=createdAt${searchTerm ? `&searchTerm=${searchTerm}` : ''}`, {headers: getHeaders()});
     }
 }
 
