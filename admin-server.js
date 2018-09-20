@@ -20,6 +20,9 @@ app.get('/fonts/*.ttf', (req, res) => {
 app.get('/images/*.png', (req, res) => {
   res.sendFile(path.join(__dirname, `dist/${req.url}`));
 });
+app.get('/images/*.ico', (req, res) => {
+  res.sendFile(path.join(__dirname, `dist/${req.url}`));
+});
 app.get('*.js', (req, res) => {
   res.sendFile(path.join(__dirname, `dist/${req.url}`));
 });
