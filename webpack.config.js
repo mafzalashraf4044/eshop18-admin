@@ -84,7 +84,7 @@ module.exports = {
         include: path.resolve(__dirname, 'src'),
         exclude: /node_modules/,
       }, {
-        test: /\.(jpe?g|png|gif|svg)$/,
+        test: /\.(jpe?g|png|gif|svg|ico)$/,
         use: ['file-loader?name=images/[name].[ext]', 'image-webpack-loader'],
       }, {
         test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,

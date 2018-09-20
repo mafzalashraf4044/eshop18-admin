@@ -1,5 +1,6 @@
 const defaultState = {
     isLoggedIn: false,
+    user: {},
 };
 
 export default (state = defaultState, action) => {

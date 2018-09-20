@@ -15,3 +15,14 @@ export const createOrUpdateConfig = (config) => {
         return axios.post(`${API_URL}/config`, config, {headers: getHeaders()});
     }
 }
+
+export const changePassword = (id, newPwd) => {
+    console.log('id', id);
+    console.log('newPwd', newPwd);
+    
+    
+    return (dispatch) => {
+        return axios.post(`${API_URL}/change-password-admin/${id}`, {newPwd}, {headers: getHeaders()});
+    }
+  }
+  
