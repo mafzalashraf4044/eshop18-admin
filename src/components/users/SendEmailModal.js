@@ -26,13 +26,6 @@ export default class SendEmailModal extends Component {
         );
     }
 
-    componentWillReceiveProps = (props) => {
-        this.setState({
-            subject: '',
-            content: '',
-        });            
-    }
-
     _handleInputChange = (event) => {
         let target = event.target;
         this.setState({[target.name]: target.value});

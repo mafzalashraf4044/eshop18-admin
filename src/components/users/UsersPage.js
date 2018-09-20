@@ -249,12 +249,14 @@ class UsersPage extends Component {
             _toggleDltModal={this._toggleDltModal}
             _dltSelected={this._dltSelectedUser}
           />
-         
-          <SendEmailModal
-            showSendEmailModal={this.state.showSendEmailModal}
-            _toggleSendEmailModal={this._toggleSendEmailModal}
-            _sendEmail={this._sendEmail}
-          />
+         {
+           this.state.showSendEmailModal &&
+            <SendEmailModal
+              showSendEmailModal={this.state.showSendEmailModal}
+              _toggleSendEmailModal={this._toggleSendEmailModal}
+              _sendEmail={this._sendEmail}
+            />
+         }
 
           <UserDetailsModal
             userDetails={this.state.userDetails}
