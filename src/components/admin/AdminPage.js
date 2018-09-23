@@ -58,7 +58,7 @@ export default class AdminPage extends Component {
                           <Row>
                               <Col xs={12}>
                                   <AppBar
-                                      title="eBuyExchange"
+                                      title="eshop18"
                                       showMenuIconButton={this.state.width < 992}
                                       iconElementLeft={
                                           <IconButton onTouchTap={this.handleNavbarToggle}>
